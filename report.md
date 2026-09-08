@@ -11,12 +11,18 @@ vs 1.25) and CRPS (0.034 vs 0.062) tell the same story.
 <img width="694" height="364" alt="MASE comparison" src="https://github.com/user-attachments/assets/cc89382c-c4e9-4f83-810e-59ad875162b9" />
 
 ## The intervals
-Neither model's 80% intervals are well-calibrated: SeasonalNaive covers
-only 51% of actuals, AutoARIMA 70% — both overconfident, though
-AutoARIMA is meaningfully closer to honest. At a stated 80% confidence
-level, an interval that only covers the truth half the time is not a
-band a manager should trust at face value. This is a real limitation
-worth flagging, not just a footnote.
+At the 95% level, the floor's forecast band is roughly 140 units wide
+one month out (e.g. 346–488 around a point forecast of 417), and widens
+further at longer horizons — a substantial range for operational planning.
+Width alone isn't the full picture, though: coverage tells us whether
+that width is actually earned. Neither model's 80% intervals are
+well-calibrated — SeasonalNaive covers only 51% of actuals, AutoARIMA
+70% — both overconfident, though AutoARIMA is meaningfully closer to
+honest. At a stated 80% confidence level, a band that only covers the
+truth half the time is not one a manager should trust at face value.
+This is a real limitation worth flagging, not just a footnote.
+
+<img width="1002" height="452" alt="Floor uncertainty fan chart" src="https://github.com/user-attachments/assets/d2fcc638-a7ea-4943-a511-3427334cc144" />
 
 ## The residuals
 Ljung-Box on AutoARIMA's cross-validated residuals still rejects white
@@ -37,18 +43,18 @@ picking up rather than a true model deficiency.
 ## One change
 The next thing I'd try is fitting on a log scale instead of the raw
 passenger counts. The decomposition showed the seasonal swings and the
-residual noise both growing right alongside the trend — the textbook sign
+residual noise both growing right alongside the trend the textbook sign
 of multiplicative seasonality, not additive. AutoARIMA was fit on the raw
 scale, and its leftover residuals still show significant structure at
 both lag 12 and lag 24, some of which is likely this unmodeled growth
 in seasonal amplitude.
 
 Taking the log of the series before fitting turns that multiplicative
-pattern into an additive one, which ARIMA-family models are built to
+pattern into an additive one, which ARIMA family models are built to
 handle cleanly. I'd expect this to do two things: further reduce the
 leftover structure in the residuals (moving Ljung-Box's p-value closer
 to "looks like noise"), and produce forecast intervals that widen more
-realistically in the later, higher-volatility years — directly helping
+realistically in the later, higher-volatility years directly helping
 the coverage problem above, since a chunk of that overconfidence
 likely comes from treating a growing-variance series as if its swings
 were constant.
@@ -69,5 +75,3 @@ mechanistic connection to the target — an important, if slightly
 negative, result in its own right.
 
 <img width="754" height="364" alt="Three-way MASE comparison" src="https://github.com/user-attachments/assets/c24e8686-1884-4eb7-ac2b-af0d886373cc" />
-
-
