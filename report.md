@@ -57,7 +57,7 @@ even though its point forecasts don't account for trend.
 ### What the floor leaves on the table
 Ljung-Box on the floor's residuals (y_t - y_t-12) rejects white noise 
 overwhelmingly at both lag 12 (p ≈ 2e-43) and lag 24 (p ≈ 2e-44). This 
-isn't randomness — the year-over-year differences are consistently 
+isn't randomness the year-over-year differences are consistently 
 positive and growing, which is exactly the trend the floor can't see. 
 Any model that adds a trend component on top of seasonality (SARIMA, 
 Holt-Winters/ETS) should be able to capture this structure and beat 
@@ -79,3 +79,29 @@ as a rough shortlist. That said, it agrees with every earlier finding:
 trend-aware models (AutoARIMA) beat the seasonal-only floor, and plain 
 Naive performs worst. This motivates testing an ARIMA-family model 
 properly through the rolling-origin harness next.
+
+
+### The harness
+Built the rolling-origin cross-validation: 8 independent origins 
+(Dec 1952 through Dec 1959, spaced 12 months apart), each forecasting 
+12 months ahead against real held-out actuals — 96 forecast/actual 
+pairs total for the floor model. Already visible in the raw output: 
+the floor consistently under-forecasts, consistent with the trend 
+the floor can't see (per section 2.1's Ljung-Box result).
+
+### The recommendation
+Ship AutoARIMA over the seasonal-naive floor: it roughly halves the 
+forecast error (MASE 0.65 vs. 1.31), validated across 8 rolling-origin 
+cross-validation windows, not a single lucky holdout. The improvement 
+holds consistently, not just on average — AutoARIMA's worst window 
+(MASE 1.59) still beats the floor's worst window (1.96). RMSSE (0.68 
+vs 1.25) and CRPS (0.034 vs 0.062) tell the same story.
+
+<img width="694" height="364" alt="stat7" src="https://github.com/user-attachments/assets/cc89382c-c4e9-4f83-810e-59ad875162b9" />
+
+
+### The intervals
+Neither model's 80% intervals are well-calibrated: SeasonalNaive covers 
+only 51% of actuals, AutoARIMA 70% — both overconfident, though 
+AutoARIMA is meaningfully closer to honest. This is a real limitation 
+worth flagging, not just a footnote.
