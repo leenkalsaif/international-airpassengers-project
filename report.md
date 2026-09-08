@@ -40,7 +40,5 @@ identical repeats of the same yearly shape, with no continued climb.
 Given the series' trend strength of 1.00, the real future is expected 
 to keep rising above this flat, repeating forecast — this is the gap 
 our model needs to close to earn its place over the floor.
-
-![Seasonal Naive floor vs. history](<img width="1112" height="518" alt="stat5" src="https://github.com/user-attachments/assets/e19249e6-cfa2-4f78-af46-22795a2e35ca" />
-)
+<img width="1112" height="518" alt="stat5" src="https://github.com/user-attachments/assets/62748d62-af7a-4eab-a39e-ab6675df4d31" />
 
