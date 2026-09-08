@@ -32,6 +32,7 @@ cutoff — the fingerprint of a trending, non-stationary series. Small
 bumps at lag 12 and lag 24 confirm the yearly seasonal pattern is real. 
 Together this points to differencing (and seasonal differencing) being 
 necessary before fitting an ARIMA-family model.
+
 <img width="584" height="364" alt="stat3" src="https://github.com/user-attachments/assets/4feba5a0-633e-4a10-870c-a74ae0068b0a" />
 
 ### The floor
