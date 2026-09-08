@@ -1,4 +1,4 @@
-# International Air Passengers — Forecast Report
+# International Air Passengers (Forecast Report)
 
 ## The recommendation
 Ship AutoARIMA over the seasonal-naive floor: it roughly halves the
