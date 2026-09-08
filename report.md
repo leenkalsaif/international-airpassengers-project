@@ -43,3 +43,15 @@ to keep rising above this flat, repeating forecast — this is the gap
 our model needs to close to earn its place over the floor.
 <img width="1112" height="518" alt="stat5" src="https://github.com/user-attachments/assets/62748d62-af7a-4eab-a39e-ab6675df4d31" />
 
+
+### Floor uncertainty (fan chart)
+The 80%/95% bands widen and narrow with the season itself — wider 
+around the volatile summer peaks, narrower around the calmer winter 
+troughs — and grow slightly wider overall in the second forecast year 
+than the first. The floor is honestly representing its own uncertainty, 
+even though its point forecasts don't account for trend.
+
+<img width="1002" height="452" alt="stat6" src="https://github.com/user-attachments/assets/d2fcc638-a7ea-4943-a511-3427334cc144" />
+
+
+
