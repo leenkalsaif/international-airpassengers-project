@@ -71,3 +71,11 @@ a validated harness result — only the rolling-origin cross-validation
 numbers count for the report.
 
 
+### Reading the AutoGluon leaderboard
+score_val is negative by AutoGluon convention (closer to zero = better). 
+No windows column is shown, meaning this ranking likely reflects a 
+single 12-month holdout — too fragile to trust as a final result, only 
+as a rough shortlist. That said, it agrees with every earlier finding: 
+trend-aware models (AutoARIMA) beat the seasonal-only floor, and plain 
+Naive performs worst. This motivates testing an ARIMA-family model 
+properly through the rolling-origin harness next.
