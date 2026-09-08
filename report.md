@@ -44,7 +44,7 @@ our model needs to close to earn its place over the floor.
 <img width="1112" height="518" alt="stat5" src="https://github.com/user-attachments/assets/62748d62-af7a-4eab-a39e-ab6675df4d31" />
 
 
-### Floor uncertainty (fan chart)
+### Floor uncertainty
 The 80%/95% bands widen and narrow with the season itself — wider 
 around the volatile summer peaks, narrower around the calmer winter 
 troughs — and grow slightly wider overall in the second forecast year 
@@ -53,5 +53,21 @@ even though its point forecasts don't account for trend.
 
 <img width="1002" height="452" alt="stat6" src="https://github.com/user-attachments/assets/d2fcc638-a7ea-4943-a511-3427334cc144" />
 
+
+### What the floor leaves on the table
+Ljung-Box on the floor's residuals (y_t - y_t-12) rejects white noise 
+overwhelmingly at both lag 12 (p ≈ 2e-43) and lag 24 (p ≈ 2e-44). This 
+isn't randomness — the year-over-year differences are consistently 
+positive and growing, which is exactly the trend the floor can't see. 
+Any model that adds a trend component on top of seasonality (SARIMA, 
+Holt-Winters/ETS) should be able to capture this structure and beat 
+the floor.
+
+### AutoGluon leaderboard 
+Quick AutoGluon run (2-min time limit) shows AutoARIMA and its 
+WeightedEnsemble beating SeasonalNaive on score_val (~-1.54 vs -1.66), 
+suggesting a trend-aware model likely beats the floor. This is not 
+a validated harness result — only the rolling-origin cross-validation 
+numbers count for the report.
 
 
